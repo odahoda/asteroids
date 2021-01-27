@@ -36,7 +36,7 @@ func _process(delta: float) -> void:
 		position.y = -32
 
 func _on_collision(other: Area2D):
-	if shield_counter > 0:
+	if shield_counter > 0 and other is Aster:
 		shield_hit = 0.4
 
 func enable_shield():

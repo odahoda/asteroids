@@ -5,10 +5,13 @@ var explosion_scene = preload("res://explosion.tscn")
 var bullet_scene = preload("res://bullet.tscn")
 var spawn
 var next_spawn_group = 0
+var score: int = 0
 
 func _ready() -> void:
 	randomize()
 	spawn = 0.0
+	score = 0
+	$HUD/score.text = "%s" % score
 	$player.position = get_viewport_rect().size / 2
 
 func _physics_process(delta: float) -> void:
@@ -20,6 +23,10 @@ func _physics_process(delta: float) -> void:
 func _input(event):
 	if event.is_action_pressed("ui_accept"):
 		shoot()
+
+func collect_score(amount):
+	score += amount
+	$HUD/score.text = "%s" % score
 
 func spawn_aster() -> void:
 	$spawn_path/location.offset = randi()
@@ -65,9 +72,13 @@ func handle_collision(o1: Area2D, o2: Area2D):
 		if o2.shape == 'big':
 			create_aster('medium', o2.position, Vector2(rand_range(100, 400), 0).rotated(rand_range(0, 2*PI)), next_spawn_group)
 			create_aster('medium', o2.position, Vector2(rand_range(100, 400), 0).rotated(rand_range(0, 2*PI)), next_spawn_group)
+			collect_score(50)
 		elif o2.shape == 'medium':
 			create_aster('small', o2.position, Vector2(rand_range(100, 400), 0).rotated(rand_range(0, 2*PI)), next_spawn_group)
 			create_aster('small', o2.position, Vector2(rand_range(100, 400), 0).rotated(rand_range(0, 2*PI)), next_spawn_group)
+			collect_score(20)
+		else:
+			collect_score(10)
 		next_spawn_group += 1
 
 		var explosion = explosion_scene.instance()
