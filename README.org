@@ -1,0 +1,13 @@
+
+* TODOs
+** audio effects
+** background music
+** score
+** player explosion
+** lifes
+** start screen
+** settings
+** pause game
+** max speed
+** health bar
+** build release from cmdline
