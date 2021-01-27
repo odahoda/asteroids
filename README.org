@@ -2,6 +2,8 @@
 * TODOs
 ** DONE score
 CLOSED: [2021-01-27 Mi 23:20]
+** DONE max speed
+CLOSED: [2021-01-28 Do 00:00]
 ** audio effects
 ** background music
 ** player explosion
@@ -9,7 +11,6 @@ CLOSED: [2021-01-27 Mi 23:20]
 ** start screen
 ** settings
 ** pause game
-** max speed
 ** health bar
 ** build release from cmdline
 ** credits

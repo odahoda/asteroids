@@ -3,6 +3,7 @@ extends Area2D
 
 const ROT_SPEED = 200
 const ACCEL = 500
+const MAX_VELOCITY = 400
 
 var velocity = Vector2(0, 0)
 var shield_counter = 2
@@ -24,6 +25,7 @@ func _process(delta: float) -> void:
 		rotation_degrees -= ROT_SPEED * delta
 	if Input.is_action_pressed("ui_up"):
 		velocity += Vector2(0, -ACCEL * delta).rotated(rotation)
+		velocity = min(velocity.length(), MAX_VELOCITY) * velocity.normalized()
 		$thruster.visible = true
 		$thruster_smoke.emitting = true
 	else:
