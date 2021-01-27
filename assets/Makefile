@@ -1,4 +1,4 @@
-all: aster1.png aster2.png aster3.png smoke1.png pship.png shield.png ball1.png
+all: aster1.png aster2.png aster3.png smoke1.png pship.png shield.png thruster.png ball1.png
 
 aster1.png: src/aster1.ini src/aster1.pov src/aster1-tri.pov
 	povray +V +Lsrc/ 'src/aster1.ini[final]' +Isrc/aster1.pov +O/tmp/aster1-
@@ -23,6 +23,11 @@ smoke1.png: src/smoke1.ini src/smoke1.pov
 
 pship.png: src/pship.ini src/pship.pov src/pship-obj.pov
 	povray +V +Lsrc/ 'src/pship.ini[final]' +Isrc/pship.pov +Opship
+
+thruster.png: src/pship.ini src/pship.pov src/pship-obj.pov
+	povray +V +Lsrc/ 'src/pship.ini[thruster]' +Isrc/pship.pov +O/tmp/thruster-
+	convert -append /tmp/thruster-*.png thruster.png
+	rm -f /tmp/thruster-*.png
 
 shield.png: src/shield.ini src/shield.pov
 	povray +V +Lsrc/ 'src/shield.ini[final]' +Isrc/shield.pov +O/tmp/shield-

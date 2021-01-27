@@ -9,6 +9,8 @@ var shield_counter = 2
 var shield_hit = 0
 
 func _ready() -> void:
+	$thruster.visible = false
+	$thruster_smoke.emitting = false
 	enable_shield()
 	connect("area_entered", self, "_on_collision")
 
@@ -22,7 +24,12 @@ func _process(delta: float) -> void:
 		rotation_degrees -= ROT_SPEED * delta
 	if Input.is_action_pressed("ui_up"):
 		velocity += Vector2(0, -ACCEL * delta).rotated(rotation)
-		
+		$thruster.visible = true
+		$thruster_smoke.emitting = true
+	else:
+		$thruster.visible = false
+		$thruster_smoke.emitting = false
+
 	position += velocity * delta
 	
 	var screen = get_viewport_rect().size
