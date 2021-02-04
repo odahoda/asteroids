@@ -4,19 +4,16 @@
 CLOSED: [2021-01-27 Mi 23:20]
 ** DONE max speed
 CLOSED: [2021-01-28 Do 00:00]
+** DONE start screen
+CLOSED: [2021-02-04 Do 02:10]
 ** audio effects
 ** background music
 ** player explosion
 ** lifes
-** start screen
 ** settings
 ** pause game
 ** health bar
 ** build release from cmdline
-** credits
-- music
-- font: Stellar Kombat by Joiro Hatagaya
-
 ** proper game play
 - asteroids wrap around screen, too
 - fixed number of asteroids spawned at beginning of wave
