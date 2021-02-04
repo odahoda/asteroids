@@ -33,6 +33,7 @@ _global_script_class_icons={
 [application]
 
 config/name="asteroids"
+run/main_scene="res://game.tscn"
 
 [rendering]
 

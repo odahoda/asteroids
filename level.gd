@@ -1,8 +1,11 @@
 extends Node2D
 
+signal finished
+
 var aster_scene = preload("res://aster.tscn")
 var explosion_scene = preload("res://explosion.tscn")
 var bullet_scene = preload("res://bullet.tscn")
+var player_scene = preload("res://player.tscn")
 var spawn
 var next_spawn_group = 0
 var score: int = 0
@@ -12,6 +15,9 @@ func _ready() -> void:
 	spawn = 0.0
 	score = 0
 	$HUD/score.text = "%s" % score
+	
+	var player = player_scene.instance()
+	add_child(player)
 	$player.position = get_viewport_rect().size / 2
 
 func _physics_process(delta: float) -> void:
@@ -23,6 +29,8 @@ func _physics_process(delta: float) -> void:
 func _input(event):
 	if event.is_action_pressed("ui_accept"):
 		shoot()
+	if event.is_action_pressed("ui_cancel"):
+		emit_signal('finished')
 
 func collect_score(amount):
 	score += amount
@@ -108,4 +116,4 @@ func shoot() -> void:
 	var bullet = bullet_scene.instance()
 	bullet.position = $player/tip.global_position
 	bullet.velocity = Vector2(0, -300).rotated($player.rotation) + $player.velocity
-	call_deferred("add_child_below_node", $background, bullet)
+	call_deferred("add_child_below_node", $HUD, bullet)

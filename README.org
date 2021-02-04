@@ -16,3 +16,11 @@ CLOSED: [2021-01-28 Do 00:00]
 ** credits
 - music
 - font: Stellar Kombat by Joiro Hatagaya
+
+** proper game play
+- asteroids wrap around screen, too
+- fixed number of asteroids spawned at beginning of wave
+- start next wave, when all asteroids cleared
+- limit lifetime of bullets
+- better kinectics for collisions
+  - mainain impulse
