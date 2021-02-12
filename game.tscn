@@ -1,25 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://game.gd" type="Script" id=1]
-[ext_resource path="res://level.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/background.jpeg" type="Texture" id=3]
-[ext_resource path="res://main_menu.tscn" type="PackedScene" id=5]
-
-[sub_resource type="Animation" id=1]
-resource_name = "menu_out"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/path = NodePath("HUD/main_menu:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
-}
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
@@ -30,13 +12,3 @@ position = Vector2( -8, -56 )
 scale = Vector2( 1.6125, 1.6125 )
 texture = ExtResource( 3 )
 centered = false
-
-[node name="animations" type="AnimationPlayer" parent="."]
-anims/menu_out = SubResource( 1 )
-
-[node name="HUD" type="CanvasLayer" parent="."]
-
-[node name="main_menu" parent="HUD" instance=ExtResource( 5 )]
-
-[node name="level" parent="." instance=ExtResource( 2 )]
-visible = false

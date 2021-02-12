@@ -3,11 +3,11 @@
 [ext_resource path="res://level.gd" type="Script" id=1]
 [ext_resource path="res://assets/stellarkombat.ttf" type="DynamicFontData" id=4]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 size = 24
 font_data = ExtResource( 4 )
 
-[sub_resource type="Curve2D" id=1]
+[sub_resource type="Curve2D" id=2]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, -128, -128, 0, 0, 0, 0, 1152, -128, 0, 0, 0, 0, 1152, 728, 0, 0, 0, 0, -128, 728, 0, 0, 0, 0, -128, -128 )
 }
@@ -25,7 +25,7 @@ margin_top = 32.0
 margin_right = -64.0
 margin_bottom = 46.0
 grow_horizontal = 0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "0"
 align = 2
 __meta__ = {
@@ -33,7 +33,7 @@ __meta__ = {
 }
 
 [node name="spawn_path" type="Path2D" parent="."]
-curve = SubResource( 1 )
+curve = SubResource( 2 )
 
 [node name="location" type="PathFollow2D" parent="spawn_path"]
 position = Vector2( -128, -128 )

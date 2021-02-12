@@ -1,29 +1,64 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://gui_theme.tres" type="Theme" id=1]
 [ext_resource path="res://credits.gd" type="Script" id=2]
 [ext_resource path="res://assets/stellarkombat.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://main_menu.gd" type="Script" id=4]
 
+[sub_resource type="CanvasItemMaterial" id=1]
+
 [sub_resource type="CanvasItemMaterial" id=2]
 
-[sub_resource type="CanvasItemMaterial" id=3]
-
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=3]
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 3 )
 
-[node name="main_menu" type="Control"]
+[sub_resource type="Animation" id=5]
+resource_name = "fade_in"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("controls:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "fade_out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("controls:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="main_menu" type="CanvasLayer"]
+script = ExtResource( 4 )
+
+[node name="controls" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
-script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="buttons" type="VBoxContainer" parent="."]
+[node name="buttons" type="VBoxContainer" parent="controls"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 70.0
@@ -35,27 +70,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="settings" type="Button" parent="buttons"]
+[node name="settings" type="Button" parent="controls/buttons"]
 margin_right = 274.0
 margin_bottom = 58.0
 size_flags_vertical = 3
 text = "Settings"
 
-[node name="play" type="Button" parent="buttons"]
+[node name="play" type="Button" parent="controls/buttons"]
 margin_top = 74.0
 margin_right = 274.0
 margin_bottom = 132.0
 size_flags_vertical = 3
 text = "Play"
 
-[node name="quit" type="Button" parent="buttons"]
+[node name="quit" type="Button" parent="controls/buttons"]
 margin_top = 148.0
 margin_right = 274.0
 margin_bottom = 206.0
 size_flags_vertical = 3
 text = "Quit"
 
-[node name="title" type="Label" parent="."]
+[node name="title" type="Label" parent="controls"]
 margin_left = 70.0
 margin_top = 50.0
 margin_right = 278.0
@@ -66,7 +101,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="version" type="Label" parent="."]
+[node name="version" type="Label" parent="controls"]
 margin_left = 704.0
 margin_top = 48.0
 margin_right = 773.0
@@ -76,8 +111,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="credits" type="Container" parent="."]
-material = SubResource( 2 )
+[node name="credits" type="Container" parent="controls"]
+material = SubResource( 1 )
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -92,14 +127,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="text" type="RichTextLabel" parent="credits"]
-material = SubResource( 3 )
+[node name="text" type="RichTextLabel" parent="controls/credits"]
+material = SubResource( 2 )
 margin_top = 1.52588e-05
 margin_right = 380.0
 margin_bottom = 100.0
 rect_clip_content = false
 size_flags_horizontal = 3
-custom_fonts/normal_font = SubResource( 1 )
+custom_fonts/normal_font = SubResource( 3 )
 bbcode_enabled = true
 bbcode_text = "[center]Credits go here
 "
@@ -110,3 +145,7 @@ scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="animations" type="AnimationPlayer" parent="."]
+anims/fade_in = SubResource( 5 )
+anims/fade_out = SubResource( 4 )
