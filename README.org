@@ -6,13 +6,13 @@ CLOSED: [2021-01-27 Mi 23:20]
 CLOSED: [2021-01-28 Do 00:00]
 ** DONE start screen
 CLOSED: [2021-02-04 Do 02:10]
-** audio effects
 ** background music
 ** player explosion
 ** lifes
 ** settings
 ** pause game
 ** health bar
+** high scores
 ** build release from cmdline
 ** proper game play
 - asteroids wrap around screen, too

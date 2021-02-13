@@ -9,6 +9,8 @@ var player_scene = preload("res://player.tscn")
 var spawn
 var next_spawn_group = 0
 var score: int = 0
+onready var expl4_snd = [$expl4_snd1, $expl4_snd2, $expl4_snd3]
+var expl4_snd_idx = 0
 
 func _ready() -> void:
 	randomize()
@@ -70,24 +72,40 @@ func handle_collision(o1: Area2D, o2: Area2D):
 		o1 = o2
 		o2 = t
 
-	if o1 is Player:
+	if o1 is Player and o2 is Aster:
+		var size
+		if o2.shape == 'big':
+			size = 2
+		elif o2.shape == 'medium':
+			size = 1
+		else:
+			size = 0
+
+		play_expl4_snd(size)
+
 		var explosion = explosion_scene.instance()
 		explosion.position = o2.position
 		call_deferred("add_child", explosion)
 		o2.die()
 
 	if o1 is Bullet and o2 is Aster:
+		var size
 		if o2.shape == 'big':
 			create_aster('medium', o2.position, Vector2(rand_range(100, 400), 0).rotated(rand_range(0, 2*PI)), next_spawn_group)
 			create_aster('medium', o2.position, Vector2(rand_range(100, 400), 0).rotated(rand_range(0, 2*PI)), next_spawn_group)
 			collect_score(50)
+			size = 2
 		elif o2.shape == 'medium':
 			create_aster('small', o2.position, Vector2(rand_range(100, 400), 0).rotated(rand_range(0, 2*PI)), next_spawn_group)
 			create_aster('small', o2.position, Vector2(rand_range(100, 400), 0).rotated(rand_range(0, 2*PI)), next_spawn_group)
 			collect_score(20)
+			size = 1
 		else:
 			collect_score(10)
+			size = 0
 		next_spawn_group += 1
+
+		play_expl4_snd(size)
 
 		var explosion = explosion_scene.instance()
 		explosion.position = o2.position
@@ -96,24 +114,38 @@ func handle_collision(o1: Area2D, o2: Area2D):
 		o1.queue_free()
 
 func explode(a1: Aster, a2: Aster) -> void:
+	var size = 0
 	for a in [a1, a2]:
 		if a.shape == 'big':
+			size = max(size, 2)
 			create_aster('medium', a.position, Vector2(rand_range(100, 400), 0).rotated(rand_range(0, 2*PI)), next_spawn_group)
 			create_aster('medium', a.position, Vector2(rand_range(100, 400), 0).rotated(rand_range(0, 2*PI)), next_spawn_group)
 			create_aster('small', a.position, Vector2(rand_range(200, 300), 0).rotated(rand_range(0, 2*PI)), next_spawn_group)
 			create_aster('small', a.position, Vector2(rand_range(200, 300), 0).rotated(rand_range(0, 2*PI)), next_spawn_group)
 		elif a.shape == 'medium':
+			size = max(size, 1)
 			create_aster('small', a.position, Vector2(rand_range(100, 400), 0).rotated(rand_range(0, 2*PI)), next_spawn_group)
 			create_aster('small', a.position, Vector2(rand_range(100, 400), 0).rotated(rand_range(0, 2*PI)), next_spawn_group)
 			create_aster('small', a.position, Vector2(rand_range(100, 400), 0).rotated(rand_range(0, 2*PI)), next_spawn_group)
+		else:
+			size = max(size, 0)
 	next_spawn_group += 1
 
 	var explosion = explosion_scene.instance()
 	explosion.position = (a1.position + a2.position) / 2
 	call_deferred("add_child", explosion)
 
+	play_expl4_snd(size)
+
+func play_expl4_snd(size: int) -> void:
+	var snd = expl4_snd[expl4_snd_idx]
+	expl4_snd_idx = (expl4_snd_idx + 1) % len(expl4_snd)
+	snd.pitch_scale = 1.8 - size * 0.5 + rand_range(-0.1, 0.1)
+	snd.play()
+	
 func shoot() -> void:
 	var bullet = bullet_scene.instance()
 	bullet.position = $player/tip.global_position
 	bullet.velocity = Vector2(0, -300).rotated($player.rotation) + $player.velocity
 	call_deferred("add_child_below_node", $HUD, bullet)
+	$laser_snd.play()

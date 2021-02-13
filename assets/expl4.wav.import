@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/expl4.wav-cee8249f0f74263285a1024eb16906ea.sample"
+
+[deps]
+
+source_file="res://assets/expl4.wav"
+dest_files=[ "res://.import/expl4.wav-cee8249f0f74263285a1024eb16906ea.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

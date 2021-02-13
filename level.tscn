@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://level.gd" type="Script" id=1]
+[ext_resource path="res://assets/expl4.wav" type="AudioStream" id=2]
+[ext_resource path="res://assets/laser.wav" type="AudioStream" id=3]
 [ext_resource path="res://assets/stellarkombat.ttf" type="DynamicFontData" id=4]
 
 [sub_resource type="DynamicFont" id=1]
@@ -37,3 +39,16 @@ curve = SubResource( 2 )
 
 [node name="location" type="PathFollow2D" parent="spawn_path"]
 position = Vector2( -128, -128 )
+
+[node name="expl4_snd1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+
+[node name="expl4_snd2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+
+[node name="expl4_snd3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+
+[node name="laser_snd" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -7.116
