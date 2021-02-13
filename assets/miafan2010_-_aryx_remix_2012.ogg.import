@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/miafan2010_-_aryx_remix_2012.ogg-625cea07280e513006f9e6d2e5fa3bec.oggstr"
+
+[deps]
+
+source_file="res://assets/miafan2010_-_aryx_remix_2012.ogg"
+dest_files=[ "res://.import/miafan2010_-_aryx_remix_2012.ogg-625cea07280e513006f9e6d2e5fa3bec.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/absolu.ogg-95ee1c049bc1afbde2f2b4e5f8fdbfbe.oggstr"
+
+[deps]
+
+source_file="res://assets/absolu.ogg"
+dest_files=[ "res://.import/absolu.ogg-95ee1c049bc1afbde2f2b4e5f8fdbfbe.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

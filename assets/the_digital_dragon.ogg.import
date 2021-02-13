@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/the_digital_dragon.ogg-b9e50462bf70ed7189ddbcfea5537922.oggstr"
+
+[deps]
+
+source_file="res://assets/the_digital_dragon.ogg"
+dest_files=[ "res://.import/the_digital_dragon.ogg-b9e50462bf70ed7189ddbcfea5537922.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

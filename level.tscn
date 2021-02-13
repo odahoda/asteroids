@@ -1,13 +1,41 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://level.gd" type="Script" id=1]
 [ext_resource path="res://assets/expl4.wav" type="AudioStream" id=2]
 [ext_resource path="res://assets/laser.wav" type="AudioStream" id=3]
 [ext_resource path="res://assets/stellarkombat.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://assets/pinkbats.ogg" type="AudioStream" id=5]
+[ext_resource path="res://assets/absolu.ogg" type="AudioStream" id=6]
+[ext_resource path="res://assets/the_digital_dragon.ogg" type="AudioStream" id=7]
+[ext_resource path="res://assets/miafan2010_-_aryx_remix_2012.ogg" type="AudioStream" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 24
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 20
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "fade"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 4, 5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 0.498039, 0.54902, 0.945098, 1 ), Color( 0.498039, 0.54902, 0.945098, 1 ), Color( 0.498039, 0.54902, 0.945098, 0 ) ]
+}
 
 [sub_resource type="Curve2D" id=2]
 _data = {
@@ -34,6 +62,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="songinfo" type="Label" parent="HUD"]
+modulate = Color( 0.498039, 0.54902, 0.945098, 0 )
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -160.0
+margin_top = -48.0
+margin_right = -62.0
+margin_bottom = -34.0
+grow_horizontal = 0
+custom_fonts/font = SubResource( 3 )
+text = "Lyla by Hohoho"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="fade" type="AnimationPlayer" parent="HUD/songinfo"]
+anims/fade = SubResource( 4 )
+
 [node name="spawn_path" type="Path2D" parent="."]
 curve = SubResource( 2 )
 
@@ -42,13 +91,33 @@ position = Vector2( -128, -128 )
 
 [node name="expl4_snd1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
+bus = "sfx"
 
 [node name="expl4_snd2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
+bus = "sfx"
 
 [node name="expl4_snd3" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
+bus = "sfx"
 
 [node name="laser_snd" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 volume_db = -7.116
+bus = "sfx"
+
+[node name="music1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+bus = "music"
+
+[node name="music2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+bus = "music"
+
+[node name="music3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+bus = "music"
+
+[node name="music4" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+bus = "music"

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/ac-ll.ogg-9e48d422cfacab8f01daf1cbd71cdd24.oggstr"
+
+[deps]
+
+source_file="res://assets/ac-ll.ogg"
+dest_files=[ "res://.import/ac-ll.ogg-9e48d422cfacab8f01daf1cbd71cdd24.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

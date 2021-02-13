@@ -6,7 +6,10 @@ CLOSED: [2021-01-27 Mi 23:20]
 CLOSED: [2021-01-28 Do 00:00]
 ** DONE start screen
 CLOSED: [2021-02-04 Do 02:10]
-** background music
+** DONE background music
+CLOSED: [2021-02-13 Sa 02:48]
+** keyboard control in main menu
+** hide mouse player in level
 ** player explosion
 ** lifes
 ** settings

@@ -11,9 +11,22 @@ var next_spawn_group = 0
 var score: int = 0
 onready var expl4_snd = [$expl4_snd1, $expl4_snd2, $expl4_snd3]
 var expl4_snd_idx = 0
+onready var music = [
+	[$music1, "absolute xtc by m0d"],
+	[$music2, "The Digital Dragon by Drozerix"],
+	[$music3, "Aryx Remix 2012 by Katie Cadet"],
+	[$music4, "PinkBatsinSpace by JAM"],
+]
+var music_idx = 0
 
 func _ready() -> void:
 	randomize()
+	
+	var m = range(len(music))
+	m.shuffle()
+	print(m)
+	play_next_song()
+
 	spawn = 0.0
 	score = 0
 	$HUD/score.text = "%s" % score
@@ -33,6 +46,14 @@ func _input(event):
 		shoot()
 	if event.is_action_pressed("ui_cancel"):
 		emit_signal('finished')
+
+func play_next_song():
+	var n = music[music_idx][0]
+	n.play()
+	n.connect('finished', self, 'play_next_song', [], CONNECT_ONESHOT)
+	$HUD/songinfo.text = music[music_idx][1]
+	$HUD/songinfo/fade.play('fade')
+	music_idx = (music_idx + 1) % len(music)
 
 func collect_score(amount):
 	score += amount

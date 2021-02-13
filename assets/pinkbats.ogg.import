@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/pinkbats.ogg-a9a1ae657d585c8953a392f5120c4c75.oggstr"
+
+[deps]
+
+source_file="res://assets/pinkbats.ogg"
+dest_files=[ "res://.import/pinkbats.ogg-a9a1ae657d585c8953a392f5120c4c75.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
