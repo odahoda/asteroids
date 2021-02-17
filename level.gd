@@ -6,9 +6,12 @@ var aster_scene = preload("res://aster.tscn")
 var explosion_scene = preload("res://explosion.tscn")
 var bullet_scene = preload("res://bullet.tscn")
 var player_scene = preload("res://player.tscn")
+var player = null
 var spawn
 var next_spawn_group = 0
 var score: int = 0
+var health: int = 100
+var animated_health: int = 100
 onready var expl4_snd = [$expl4_snd1, $expl4_snd2, $expl4_snd3]
 var expl4_snd_idx = 0
 onready var music = [
@@ -24,21 +27,29 @@ func _ready() -> void:
 	
 	var m = range(len(music))
 	m.shuffle()
-	print(m)
 	play_next_song()
 
 	spawn = 0.0
 	score = 0
 	$HUD/score.text = "%s" % score
-	
-	var player = player_scene.instance()
+	health = 100
+	animated_health = health
+	$HUD/health.value = health
+
+	player = player_scene.instance()
 	add_child(player)
-	$player.position = get_viewport_rect().size / 2
+	player.position = get_viewport_rect().size / 2
+
+	$HUD/announce.text = "Get Ready!"
+	$HUD/announce/fade.play('fade')
+
+func _process(delta: float) -> void:
+	$HUD/health.value = animated_health
 
 func _physics_process(delta: float) -> void:
 	spawn -= delta
 	if spawn <= 0:
-		spawn = 0.5
+		spawn = 3
 		spawn_aster()
 
 func _input(event):
@@ -95,14 +106,19 @@ func handle_collision(o1: Area2D, o2: Area2D):
 
 	if o1 is Player and o2 is Aster:
 		var size
+		var damage
 		if o2.shape == 'big':
 			size = 2
+			damage = 100
 		elif o2.shape == 'medium':
 			size = 1
+			damage = 40
 		else:
 			size = 0
+			damage = 15
 
 		play_expl4_snd(size)
+		inflict_damage(damage)
 
 		var explosion = explosion_scene.instance()
 		explosion.position = o2.position
@@ -166,7 +182,36 @@ func play_expl4_snd(size: int) -> void:
 	
 func shoot() -> void:
 	var bullet = bullet_scene.instance()
-	bullet.position = $player/tip.global_position
-	bullet.velocity = Vector2(0, -300).rotated($player.rotation) + $player.velocity
+	bullet.position = player.get_node('tip').global_position
+	bullet.velocity = Vector2(0, -300).rotated(player.rotation) + player.velocity
 	call_deferred("add_child_below_node", $HUD, bullet)
 	$laser_snd.play()
+
+func inflict_damage(damage: int) -> void:
+	health = max(0, health - damage)
+	if health == 0:
+		call_deferred('die')
+
+	var tween = $HUD/health/tween
+	tween.interpolate_property(self, "animated_health", animated_health, health, 0.6)
+	if not tween.is_active():
+		tween.start()
+
+func die() -> void:
+	var pos = player.position
+	player.queue_free()
+	player = null
+
+	for i in range(8):
+		var explosion = explosion_scene.instance()
+		explosion.position = pos + Vector2(0, rand_range(0, 50)).rotated(rand_range(0, 2*PI))
+		add_child(explosion)
+		play_expl4_snd(2)
+		yield(get_tree().create_timer(0.05 * (i + 5)), 'timeout')
+
+	$HUD/announce.text = "Game Over!"
+	$HUD/announce/fade.play('fade')
+	yield($HUD/announce/fade, 'animation_finished')
+
+	yield(get_tree().create_timer(1.0), 'timeout')
+	emit_signal('finished')

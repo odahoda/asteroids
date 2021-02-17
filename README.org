@@ -12,11 +12,13 @@ CLOSED: [2021-02-13 Sa 02:48]
 CLOSED: [2021-02-17 Mi 08:00]
 ** DONE keyboard control in main menu
 CLOSED: [2021-02-17 Mi 08:21]
-** player explosion
+** DONE health bar
+CLOSED: [2021-02-17 Mi 09:54]
+** DONE player explosion
+CLOSED: [2021-02-17 Mi 09:54]
 ** lifes
 ** settings
 ** pause game
-** health bar
 ** high scores
 ** build release from cmdline
 ** dynamic, async music loading

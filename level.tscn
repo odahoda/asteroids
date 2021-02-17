@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://level.gd" type="Script" id=1]
 [ext_resource path="res://assets/expl4.wav" type="AudioStream" id=2]
@@ -15,13 +15,13 @@ outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 20
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 resource_name = "fade"
 length = 5.0
 tracks/0/type = "value"
@@ -37,7 +37,67 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 0.498039, 0.54902, 0.945098, 1 ), Color( 0.498039, 0.54902, 0.945098, 1 ), Color( 0.498039, 0.54902, 0.945098, 0 ) ]
 }
 
-[sub_resource type="Curve2D" id=2]
+[sub_resource type="Gradient" id=4]
+colors = PoolColorArray( 0.648438, 0.103851, 0.103851, 1, 0.274826, 0.283777, 0.847656, 1 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
+width = 10
+
+[sub_resource type="Gradient" id=6]
+colors = PoolColorArray( 0.196848, 0.991211, 0.0387192, 1, 0.00225449, 0.577148, 0.176295, 1 )
+
+[sub_resource type="GradientTexture" id=7]
+gradient = SubResource( 6 )
+width = 10
+
+[sub_resource type="DynamicFont" id=9]
+size = 48
+outline_size = 3
+outline_color = Color( 0.457031, 0.457031, 0.457031, 1 )
+font_data = ExtResource( 4 )
+
+[sub_resource type="Animation" id=10]
+resource_name = "fade"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 1.3, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:anchor_left")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 1.3, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.5, 0.5, 1.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:anchor_right")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 1.3, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.5, 0.5, 1.0 ]
+}
+
+[sub_resource type="Curve2D" id=8]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, -128, -128, 0, 0, 0, 0, 1152, -128, 0, 0, 0, 0, 1152, 728, 0, 0, 0, 0, -128, 728, 0, 0, 0, 0, -128, -128 )
 }
@@ -73,7 +133,7 @@ margin_top = -48.0
 margin_right = -62.0
 margin_bottom = -34.0
 grow_horizontal = 0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 text = "Lyla by Hohoho"
 align = 2
 __meta__ = {
@@ -81,10 +141,46 @@ __meta__ = {
 }
 
 [node name="fade" type="AnimationPlayer" parent="HUD/songinfo"]
-anims/fade = SubResource( 4 )
+anims/fade = SubResource( 3 )
+
+[node name="health" type="TextureProgress" parent="HUD"]
+modulate = Color( 1, 1, 1, 0.631373 )
+margin_left = 48.0
+margin_top = 32.0
+margin_right = 298.0
+margin_bottom = 48.0
+texture_under = SubResource( 5 )
+texture_progress = SubResource( 7 )
+nine_patch_stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="tween" type="Tween" parent="HUD/health"]
+
+[node name="announce" type="Label" parent="HUD"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 1.0
+anchor_top = 0.2
+anchor_right = 1.0
+anchor_bottom = 0.211
+margin_left = -172.5
+margin_right = 172.5
+margin_bottom = 40.0
+grow_horizontal = 2
+custom_fonts/font = SubResource( 9 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Get ready!"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="fade" type="AnimationPlayer" parent="HUD/announce"]
+anims/fade = SubResource( 10 )
 
 [node name="spawn_path" type="Path2D" parent="."]
-curve = SubResource( 2 )
+curve = SubResource( 8 )
 
 [node name="location" type="PathFollow2D" parent="spawn_path"]
 position = Vector2( -128, -128 )
