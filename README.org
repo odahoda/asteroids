@@ -16,9 +16,10 @@ CLOSED: [2021-02-17 Mi 08:21]
 CLOSED: [2021-02-17 Mi 09:54]
 ** DONE player explosion
 CLOSED: [2021-02-17 Mi 09:54]
+** DONE pause game
+CLOSED: [2021-02-17 Mi 10:26]
 ** lifes
 ** settings
-** pause game
 ** high scores
 ** build release from cmdline
 ** dynamic, async music loading

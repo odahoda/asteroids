@@ -55,7 +55,7 @@ func _physics_process(delta: float) -> void:
 func _input(event):
 	if event.is_action_pressed("ui_accept"):
 		shoot()
-	if event.is_action_pressed("ui_cancel"):
+	elif event.is_action_pressed("ui_cancel"):
 		emit_signal('finished')
 
 func play_next_song():

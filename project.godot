@@ -35,6 +35,14 @@ _global_script_class_icons={
 config/name="asteroids"
 run/main_scene="res://game.tscn"
 
+[input]
+
+ui_pause={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":80,"unicode":0,"echo":false,"script":null)
+ ]
+}
+
 [rendering]
 
 environment/default_clear_color=Color( 0, 0, 0, 1 )
