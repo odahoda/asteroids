@@ -10,7 +10,8 @@ CLOSED: [2021-02-04 Do 02:10]
 CLOSED: [2021-02-13 Sa 02:48]
 ** DONE hide mouse pointer in level
 CLOSED: [2021-02-17 Mi 08:00]
-** keyboard control in main menu
+** DONE keyboard control in main menu
+CLOSED: [2021-02-17 Mi 08:21]
 ** player explosion
 ** lifes
 ** settings

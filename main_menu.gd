@@ -13,6 +13,7 @@ func _ready() -> void:
 	settings_button.connect('button_up', self, '__settings_pressed')
 	$animations.play('fade_in')
 	$music.play()
+	play_button.grab_focus()
 
 func __quit_pressed() -> void:
 	emit_signal('quit_pressed')
