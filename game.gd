@@ -11,6 +11,7 @@ func _ready() -> void:
 
 func set_state(state: String) -> void:
 	if state == 'menu':
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		main_menu = main_menu_scene.instance()
 		main_menu.connect('quit_pressed', self, 'quit_game')
 		main_menu.connect('play_pressed', self, 'start_level')
@@ -33,9 +34,11 @@ func set_state(state: String) -> void:
 		print("huh?")
 
 func quit_game() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	main_menu.fade_out(self, 'set_state', ['quit'])
 	
 func start_level() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	main_menu.fade_out(self, 'set_state', ['play'])
 
 func level_finished() -> void:

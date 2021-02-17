@@ -8,8 +8,9 @@ CLOSED: [2021-01-28 Do 00:00]
 CLOSED: [2021-02-04 Do 02:10]
 ** DONE background music
 CLOSED: [2021-02-13 Sa 02:48]
+** DONE hide mouse pointer in level
+CLOSED: [2021-02-17 Mi 08:00]
 ** keyboard control in main menu
-** hide mouse player in level
 ** player explosion
 ** lifes
 ** settings
@@ -17,6 +18,14 @@ CLOSED: [2021-02-13 Sa 02:48]
 ** health bar
 ** high scores
 ** build release from cmdline
+** dynamic, async music loading
+- a single music node
+- play_song(...):
+  - fade out current song
+  - load ogg resource async
+  - start playback when current song faded out and resource loaded
+  - unload prev resource
+
 ** proper game play
 - asteroids wrap around screen, too
 - fixed number of asteroids spawned at beginning of wave
