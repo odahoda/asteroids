@@ -15,7 +15,7 @@ outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 3 )
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 resource_name = "fade_in"
 length = 0.25
 step = 0.05
@@ -32,8 +32,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "fade_out"
+[sub_resource type="Animation" id=5]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("controls:modulate")
@@ -64,7 +63,6 @@ tracks/1/keys = {
 script = ExtResource( 4 )
 
 [node name="controls" type="Control" parent="."]
-modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
@@ -84,18 +82,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="settings" type="Button" parent="controls/buttons"]
+[node name="play" type="Button" parent="controls/buttons"]
 margin_right = 274.0
 margin_bottom = 58.0
 size_flags_vertical = 3
-text = "Settings"
+text = "Play"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="play" type="Button" parent="controls/buttons"]
+[node name="settings" type="Button" parent="controls/buttons"]
 margin_top = 74.0
 margin_right = 274.0
 margin_bottom = 132.0
 size_flags_vertical = 3
-text = "Play"
+text = "Settings"
 
 [node name="quit" type="Button" parent="controls/buttons"]
 margin_top = 148.0
@@ -161,8 +162,8 @@ __meta__ = {
 }
 
 [node name="animations" type="AnimationPlayer" parent="."]
-anims/fade_in = SubResource( 5 )
-anims/fade_out = SubResource( 4 )
+anims/fade_in = SubResource( 4 )
+anims/fade_out = SubResource( 5 )
 
 [node name="music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
