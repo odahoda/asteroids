@@ -15,6 +15,11 @@ func _ready() -> void:
 	$music.play()
 	play_button.grab_focus()
 
+func _input(event):
+	if event.is_action_pressed("ui_cancel"):
+		quit_button.grab_focus()
+		emit_signal('quit_pressed')
+
 func __quit_pressed() -> void:
 	emit_signal('quit_pressed')
 
