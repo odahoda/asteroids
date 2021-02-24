@@ -2,15 +2,18 @@ extends CanvasLayer
 
 signal quit_pressed
 signal settings_pressed
+signal highscores_pressed
 signal play_pressed
 onready var quit_button = $controls/buttons/quit
 onready var play_button = $controls/buttons/play
+onready var highscores_button = $controls/buttons/highscores
 onready var settings_button = $controls/buttons/settings
 
 func _ready() -> void:
-	quit_button.connect('button_up', self, '__quit_pressed')
-	play_button.connect('button_up', self, '__play_pressed')
-	settings_button.connect('button_up', self, '__settings_pressed')
+	quit_button.connect('button_up', self, 'emit_signal', ['quit_pressed'])
+	play_button.connect('button_up', self, 'emit_signal', ['play_pressed'])
+	highscores_button.connect('button_up', self, 'emit_signal', ['highscores_pressed'])
+	settings_button.connect('button_up', self, 'emit_signal', ['settings_pressed'])
 	$animations.play('fade_in')
 	$animations.seek(0, true)
 	$music.play()
@@ -20,15 +23,6 @@ func _input(event):
 	if event.is_action_pressed("ui_cancel"):
 		quit_button.grab_focus()
 		emit_signal('quit_pressed')
-
-func __quit_pressed() -> void:
-	emit_signal('quit_pressed')
-
-func __play_pressed() -> void:
-	emit_signal('play_pressed')
-	
-func __settings_pressed() -> void:
-	emit_signal('settings_pressed')
 
 func fade_out(cb_obj, cb_func, cb_args=[]) -> void:
 	$animations.play('fade_out')

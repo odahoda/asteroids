@@ -4,6 +4,8 @@ var level_scene = preload("res://level.tscn")
 var level = null
 var main_menu_scene = preload("res://main_menu.tscn")
 var main_menu = null
+var hall_of_fame_scene = preload("res://hall_of_fame.tscn")
+var hall_of_fame = null
 
 func _ready() -> void:
 	randomize()
@@ -15,7 +17,17 @@ func set_state(state: String) -> void:
 		main_menu = main_menu_scene.instance()
 		main_menu.connect('quit_pressed', self, 'quit_game')
 		main_menu.connect('play_pressed', self, 'start_level')
+		main_menu.connect('highscores_pressed', self, 'show_highscores')
 		add_child(main_menu)
+
+	elif state == 'highscores':
+		main_menu.queue_free()
+		main_menu = null
+
+		hall_of_fame = hall_of_fame_scene.instance()
+		hall_of_fame.rect_size = get_viewport_rect().size
+		hall_of_fame.connect('closed', self, 'highscores_finished')
+		add_child(hall_of_fame)
 
 	elif state == 'play':
 		main_menu.queue_free()
@@ -41,7 +53,16 @@ func start_level() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	main_menu.fade_out(self, 'set_state', ['play'])
 
+func show_highscores() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	main_menu.fade_out(self, 'set_state', ['highscores'])
+
 func level_finished() -> void:
 	level.queue_free()
 	level = null
+	set_state('menu')
+
+func highscores_finished() -> void:
+	hall_of_fame.queue_free()
+	hall_of_fame = null
 	set_state('menu')

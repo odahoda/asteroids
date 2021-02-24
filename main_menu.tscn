@@ -63,6 +63,7 @@ tracks/1/keys = {
 script = ExtResource( 4 )
 
 [node name="controls" type="Control" parent="."]
+modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
@@ -84,22 +85,32 @@ __meta__ = {
 
 [node name="play" type="Button" parent="controls/buttons"]
 margin_right = 274.0
-margin_bottom = 58.0
+margin_bottom = 39.0
 size_flags_vertical = 3
 text = "Play"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="settings" type="Button" parent="controls/buttons"]
-margin_top = 74.0
+[node name="highscores" type="Button" parent="controls/buttons"]
+margin_top = 55.0
 margin_right = 274.0
-margin_bottom = 132.0
+margin_bottom = 95.0
+size_flags_vertical = 3
+text = "Highscores"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="settings" type="Button" parent="controls/buttons"]
+margin_top = 111.0
+margin_right = 274.0
+margin_bottom = 150.0
 size_flags_vertical = 3
 text = "Settings"
 
 [node name="quit" type="Button" parent="controls/buttons"]
-margin_top = 148.0
+margin_top = 166.0
 margin_right = 274.0
 margin_bottom = 206.0
 size_flags_vertical = 3
