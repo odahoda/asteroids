@@ -181,6 +181,9 @@ func play_expl4_snd(size: int) -> void:
 	snd.play()
 	
 func shoot() -> void:
+	if player == null:
+		return
+
 	var bullet = bullet_scene.instance()
 	bullet.position = player.get_node('tip').global_position
 	bullet.velocity = Vector2(0, -300).rotated(player.rotation) + player.velocity
