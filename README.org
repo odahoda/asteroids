@@ -20,7 +20,6 @@ CLOSED: [2021-02-17 Mi 09:54]
 CLOSED: [2021-02-17 Mi 10:26]
 ** DONE high scores
 CLOSED: [2021-03-03 Mi 14:41]
-** lifes
 ** settings
 ** build release from cmdline
 ** dynamic, async music loading
@@ -32,9 +31,8 @@ CLOSED: [2021-03-03 Mi 14:41]
   - unload prev resource
 
 ** proper game play
-- asteroids wrap around screen, too
 - fixed number of asteroids spawned at beginning of wave
 - start next wave, when all asteroids cleared
 - limit lifetime of bullets
 - better kinectics for collisions
-  - mainain impulse
+  - maintain impulse

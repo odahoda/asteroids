@@ -94,7 +94,7 @@ func create_aster(shape: String, pos: Vector2, vel: Vector2, spawn_group: int = 
 	call_deferred("add_child", aster)
 
 func handle_collision(o1: Area2D, o2: Area2D):
-	if o1 is Aster and o2 is Aster and o1.spawn_group != o2.spawn_group:
+	if o1 is Aster and o2 is Aster and (o1.spawn_group == 0 or o1.spawn_group != o2.spawn_group):
 		explode(o1, o2)
 		o1.die()
 		o2.die()

@@ -52,13 +52,13 @@ colors = PoolColorArray( 0.196848, 0.991211, 0.0387192, 1, 0.00225449, 0.577148,
 gradient = SubResource( 6 )
 width = 10
 
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=8]
 size = 48
 outline_size = 3
 outline_color = Color( 0.457031, 0.457031, 0.457031, 1 )
 font_data = ExtResource( 4 )
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=9]
 resource_name = "fade"
 length = 3.0
 tracks/0/type = "value"
@@ -98,7 +98,7 @@ tracks/2/keys = {
 "values": [ 0.0, 0.5, 0.5, 1.0 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=10]
 resource_name = "fade_in"
 length = 0.3
 tracks/0/type = "value"
@@ -138,7 +138,7 @@ tracks/2/keys = {
 "values": [ 0.0, 0.5 ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=11]
 resource_name = "fade_out"
 length = 0.3
 tracks/0/type = "value"
@@ -178,7 +178,7 @@ tracks/2/keys = {
 "values": [ 0.5, 1.0 ]
 }
 
-[sub_resource type="Curve2D" id=8]
+[sub_resource type="Curve2D" id=12]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, -128, -128, 0, 0, 0, 0, 1152, -128, 0, 0, 0, 0, 1152, 728, 0, 0, 0, 0, -128, 728, 0, 0, 0, 0, -128, -128 )
 }
@@ -249,7 +249,7 @@ margin_left = -172.5
 margin_right = 172.5
 margin_bottom = 40.0
 grow_horizontal = 2
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 8 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Get ready!"
 align = 1
@@ -258,7 +258,7 @@ __meta__ = {
 }
 
 [node name="fade" type="AnimationPlayer" parent="HUD/announce"]
-anims/fade = SubResource( 10 )
+anims/fade = SubResource( 9 )
 
 [node name="paused" type="Label" parent="HUD"]
 pause_mode = 2
@@ -270,7 +270,7 @@ margin_left = -172.5
 margin_right = 172.5
 margin_bottom = 40.0
 grow_horizontal = 2
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 8 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Paused"
 align = 1
@@ -281,11 +281,11 @@ __meta__ = {
 }
 
 [node name="fade" type="AnimationPlayer" parent="HUD/paused"]
-anims/fade_in = SubResource( 11 )
-anims/fade_out = SubResource( 12 )
+anims/fade_in = SubResource( 10 )
+anims/fade_out = SubResource( 11 )
 
 [node name="spawn_path" type="Path2D" parent="."]
-curve = SubResource( 8 )
+curve = SubResource( 12 )
 
 [node name="location" type="PathFollow2D" parent="spawn_path"]
 position = Vector2( -128, -128 )

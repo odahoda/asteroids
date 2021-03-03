@@ -7,6 +7,7 @@ var vel: Vector2 = Vector2()
 var shape: String = 'big'
 var spawn_group: int = 0
 var dead = false
+var lifetime = 0.0
 
 func _ready() -> void:
 	$sprite.animation = shape
@@ -21,14 +22,22 @@ func _ready() -> void:
 	$animation.playback_speed = rand_range(-5, 5)
 	$animation.play("rotation")
 
-	#vel = Vector2(rand_range(100, 500), 0).rotated(rand_range(0, 2 * PI))
+func _process(delta: float) -> void:
+	lifetime += delta
+	if lifetime > 0.3:
+		spawn_group = 0
 
-func _physics_process(delta: float) -> void:
 	position += vel * delta
 
-func _on_visibility_viewport_exited(_viewport: Viewport) -> void:
-	#print("bye")
-	queue_free()
+	var screen = get_viewport_rect().size
+	if position.x < -32:
+		position.x = screen.x + 32
+	elif position.x >= screen.x + 32:
+		position.x = -32
+	if position.y < -32:
+		position.y = screen.y + 32
+	elif position.y >= screen.y + 32:
+		position.y = -32
 
 func _on_Area2D_area_entered(area: Area2D) -> void:
 	if not dead:

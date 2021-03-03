@@ -645,16 +645,12 @@ script = ExtResource( 4 )
 [node name="sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 121 )
 animation = "big"
-frame = 32
+frame = 12
 playing = true
 
 [node name="animation" type="AnimationPlayer" parent="."]
 playback_speed = -6.71
 anims/rotation = SubResource( 122 )
-
-[node name="visibility" type="VisibilityNotifier2D" parent="."]
-position = Vector2( -2.66968, 1.66855 )
-rect = Rect2( -64, -64, 128, 128 )
 
 [node name="collision_big" type="CollisionPolygon2D" parent="."]
 visible = false
@@ -671,4 +667,3 @@ visible = false
 polygon = PoolVector2Array( 9.99774, 6.16177, 4.15782, 8.83145, -6.5209, 5.99492, -10.6923, 0.321846, -8.52316, -6.01865, -3.01694, -8.52147, 8.82976, -5.51807, 11.4994, -1.01299 )
 disabled = true
 [connection signal="area_entered" from="." to="." method="_on_Area2D_area_entered"]
-[connection signal="viewport_exited" from="visibility" to="." method="_on_visibility_viewport_exited"]
