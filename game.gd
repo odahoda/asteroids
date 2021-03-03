@@ -1,4 +1,4 @@
-extends Node2D
+extends CanvasLayer
 
 var level_scene = preload("res://level.tscn")
 var level = null
@@ -25,7 +25,6 @@ func set_state(state: String) -> void:
 		main_menu = null
 
 		hall_of_fame = hall_of_fame_scene.instance()
-		hall_of_fame.rect_size = get_viewport_rect().size
 		hall_of_fame.connect('closed', self, 'highscores_finished')
 		add_child(hall_of_fame)
 
