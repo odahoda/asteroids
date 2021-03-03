@@ -7,7 +7,11 @@ var explosion_scene = preload("res://explosion.tscn")
 var bullet_scene = preload("res://bullet.tscn")
 var player_scene = preload("res://player.tscn")
 var player = null
-var spawn
+var tick = 0.0
+var wave = 1
+var wave_start = true
+var asters_to_spawn = 1
+var spawn = 2
 var next_spawn_group = 0
 var score: int = 0
 var health: int = 100
@@ -29,10 +33,7 @@ func _ready() -> void:
 	m.shuffle()
 	play_next_song()
 
-	spawn = 0.0
-	score = 0
 	$HUD/score.text = "%s" % score
-	health = 100
 	animated_health = health
 	$HUD/health.value = health
 
@@ -46,11 +47,27 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	$HUD/health.value = animated_health
 
-func _physics_process(delta: float) -> void:
-	spawn -= delta
-	if spawn <= 0:
-		spawn = 3
-		spawn_aster()
+	if asters_to_spawn > 0:
+		spawn -= delta
+		if spawn <= 0:
+			if wave_start:
+				$HUD/announce.text = "Wave %d" % wave
+				$HUD/announce/fade.play('fade')
+				wave_start = false
+			spawn = 3
+			spawn_aster()
+			asters_to_spawn -= 1
+	elif player != null:
+		tick += delta
+		if tick > 1.0:
+			tick = 0
+			if asters_to_spawn == 0:
+				var num_asters = len(get_tree().get_nodes_in_group("aster"))
+				if num_asters == 0:
+					wave += 1
+					wave_start = true
+					spawn = 3
+					asters_to_spawn = wave
 
 func _input(event):
 	if event.is_action_pressed("ui_accept"):
@@ -78,7 +95,7 @@ func spawn_aster() -> void:
 	var target = Vector2(screen.x * rand_range(0.3, 0.7), screen.y * rand_range(0.3, 0.7))
 	var dir = pos.angle_to_point(target) + PI
 	create_aster(
-		['big', 'medium', 'small'][randi() % 3],
+		'big',
 		pos,
 		Vector2(rand_range(50, 100), 0).rotated(dir),
 		next_spawn_group)
@@ -90,6 +107,7 @@ func create_aster(shape: String, pos: Vector2, vel: Vector2, spawn_group: int = 
 	aster.position = pos
 	aster.vel = vel
 	aster.spawn_group = spawn_group
+	aster.add_to_group("aster")
 	aster.connect('collided', self, 'handle_collision')
 	call_deferred("add_child", aster)
 
