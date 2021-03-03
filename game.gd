@@ -57,9 +57,16 @@ func show_highscores() -> void:
 	main_menu.fade_out(self, 'set_state', ['highscores'])
 
 func level_finished() -> void:
+	var score = level.score
 	level.queue_free()
 	level = null
-	set_state('menu')
+	if score > 0:
+		hall_of_fame = hall_of_fame_scene.instance()
+		hall_of_fame.set_score(score)
+		hall_of_fame.connect('closed', self, 'highscores_finished')
+		add_child(hall_of_fame)
+	else:
+		set_state('menu')
 
 func highscores_finished() -> void:
 	hall_of_fame.queue_free()
