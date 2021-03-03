@@ -7,18 +7,10 @@ var opening = true
 var closing = false
 var editing = false
 var editor = null
-var scores = [
-	["fred", 10000],
-	["clara", 1400],
-	["paul", 1200],
-	["fred", 1000],
-	["clara", 800],
-	["paul", 750],
-	["fred", 600],
-	["claudia", 500],
-	["fred", 20],
-	["fred", 10],
-]
+var scores = []
+
+func _init() -> void:
+	load_scores()
 
 func _ready() -> void:
 	refresh_scores()
@@ -47,6 +39,33 @@ func set_score(score: int) -> void:
 			scores.pop_back()
 
 	refresh_scores()
+
+func load_scores() -> void:
+	var fp = File.new()
+	if fp.file_exists("user://highscores.json"):
+		fp.open("user://highscores.json", File.READ)
+		scores = parse_json(fp.get_as_text())
+		fp.close()
+
+	else:
+		scores = [
+			["albert", 10000],
+			["stephen", 5000],
+			["pink", 2500],
+			["", 0],
+			["", 0],
+			["", 0],
+			["", 0],
+			["", 0],
+			["", 0],
+			["", 0],
+		]
+
+func save_scores() -> void:
+	var fp = File.new()
+	fp.open("user://highscores.json", File.WRITE)
+	fp.store_string(to_json(scores))
+	fp.close()
 
 func refresh_scores() -> void:
 	var box = $box/scores
@@ -81,7 +100,7 @@ func refresh_scores() -> void:
 			box.add_child(name)
 
 		var score = Label.new()
-		score.text = str(entry[1])
+		score.text = str(entry[1]) if entry[1] > 0 else ""
 		score.align = Label.ALIGN_RIGHT
 		score.size_flags_vertical = Control.SIZE_EXPAND
 		box.add_child(score)
@@ -110,6 +129,7 @@ func __fade_out_finished(_anim) -> void:
 func __editing_finished(name) -> void:
 	if len(name) > 0:
 		scores[new_pos][0] = name
+		save_scores()
 		new_pos = null
 		refresh_scores()
 		$animations.play_backwards('msg_fade')

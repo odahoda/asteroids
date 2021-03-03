@@ -18,9 +18,10 @@ CLOSED: [2021-02-17 Mi 09:54]
 CLOSED: [2021-02-17 Mi 09:54]
 ** DONE pause game
 CLOSED: [2021-02-17 Mi 10:26]
+** DONE high scores
+CLOSED: [2021-03-03 Mi 14:41]
 ** lifes
 ** settings
-** high scores
 ** build release from cmdline
 ** dynamic, async music loading
 - a single music node
