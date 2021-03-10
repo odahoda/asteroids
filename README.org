@@ -31,8 +31,5 @@ CLOSED: [2021-03-03 Mi 14:41]
   - unload prev resource
 
 ** proper game play
-- fixed number of asteroids spawned at beginning of wave
-- start next wave, when all asteroids cleared
-- limit lifetime of bullets
 - better kinectics for collisions
   - maintain impulse
