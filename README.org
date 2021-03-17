@@ -20,9 +20,8 @@ CLOSED: [2021-02-17 Mi 09:54]
 CLOSED: [2021-02-17 Mi 10:26]
 ** DONE high scores
 CLOSED: [2021-03-03 Mi 14:41]
-** settings
-** build release from cmdline
-** dynamic, async music loading
+** DONE dynamic, async music loading
+CLOSED: [2021-03-17 Mi 17:13]
 - a single music node
 - play_song(...):
   - fade out current song
@@ -30,6 +29,8 @@ CLOSED: [2021-03-03 Mi 14:41]
   - start playback when current song faded out and resource loaded
   - unload prev resource
 
+** settings
+** build release from cmdline
 ** proper game play
 - better kinectics for collisions
   - maintain impulse

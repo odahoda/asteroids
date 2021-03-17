@@ -19,19 +19,20 @@ var animated_health: int = 100
 onready var expl4_snd = [$expl4_snd1, $expl4_snd2, $expl4_snd3]
 var expl4_snd_idx = 0
 onready var music = [
-	[$music1, "absolute xtc by m0d"],
-	[$music2, "The Digital Dragon by Drozerix"],
-	[$music3, "Aryx Remix 2012 by Katie Cadet"],
-	[$music4, "PinkBatsinSpace by JAM"],
+	['res://assets/absolu.ogg', "absolute xtc by m0d"],
+	['res://assets/the_digital_dragon.ogg', "The Digital Dragon by Drozerix"],
+	['res://assets/miafan2010_-_aryx_remix_2012.ogg', "Aryx Remix 2012 by Katie Cadet"],
+	['res://assets/pinkbats.ogg', "PinkBatsinSpace by JAM"],
 ]
 var music_idx = 0
 
 func _ready() -> void:
 	randomize()
-	
-	var m = range(len(music))
-	m.shuffle()
-	play_next_song()
+
+	var music_player = get_node('/root/game/music_player')
+	if music_player != null:
+		music_player.connect('finished', self, 'play_next_song')
+		play_next_song()
 
 	$HUD/score.text = "%s" % score
 	animated_health = health
@@ -76,9 +77,8 @@ func _input(event):
 		emit_signal('finished')
 
 func play_next_song():
-	var n = music[music_idx][0]
-	n.play()
-	n.connect('finished', self, 'play_next_song', [], CONNECT_ONESHOT)
+	var music_player = get_node('/root/game/music_player')
+	music_player.play_song(music[music_idx][0])
 	$HUD/songinfo.text = music[music_idx][1]
 	$HUD/songinfo/fade.play('fade')
 	music_idx = (music_idx + 1) % len(music)

@@ -1,13 +1,9 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://level.gd" type="Script" id=1]
 [ext_resource path="res://assets/expl4.wav" type="AudioStream" id=2]
 [ext_resource path="res://assets/laser.wav" type="AudioStream" id=3]
 [ext_resource path="res://assets/stellarkombat.ttf" type="DynamicFontData" id=4]
-[ext_resource path="res://assets/pinkbats.ogg" type="AudioStream" id=5]
-[ext_resource path="res://assets/absolu.ogg" type="AudioStream" id=6]
-[ext_resource path="res://assets/the_digital_dragon.ogg" type="AudioStream" id=7]
-[ext_resource path="res://assets/miafan2010_-_aryx_remix_2012.ogg" type="AudioStream" id=8]
 [ext_resource path="res://paused.gd" type="Script" id=9]
 
 [sub_resource type="DynamicFont" id=1]
@@ -306,23 +302,3 @@ bus = "sfx"
 stream = ExtResource( 3 )
 volume_db = -7.116
 bus = "sfx"
-
-[node name="music1" type="AudioStreamPlayer" parent="."]
-pause_mode = 2
-stream = ExtResource( 6 )
-bus = "music"
-
-[node name="music2" type="AudioStreamPlayer" parent="."]
-pause_mode = 2
-stream = ExtResource( 7 )
-bus = "music"
-
-[node name="music3" type="AudioStreamPlayer" parent="."]
-pause_mode = 2
-stream = ExtResource( 8 )
-bus = "music"
-
-[node name="music4" type="AudioStreamPlayer" parent="."]
-pause_mode = 2
-stream = ExtResource( 5 )
-bus = "music"

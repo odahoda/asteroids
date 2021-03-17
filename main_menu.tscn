@@ -1,10 +1,9 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://gui_theme.tres" type="Theme" id=1]
 [ext_resource path="res://credits.gd" type="Script" id=2]
 [ext_resource path="res://assets/stellarkombat.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://main_menu.gd" type="Script" id=4]
-[ext_resource path="res://assets/ac-ll.ogg" type="AudioStream" id=5]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 
@@ -45,18 +44,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("music:volume_db")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0.0, -40.046 ]
 }
 
 [node name="main_menu" type="CanvasLayer"]
@@ -174,7 +161,3 @@ __meta__ = {
 [node name="animations" type="AnimationPlayer" parent="."]
 anims/fade_in = SubResource( 4 )
 anims/fade_out = SubResource( 5 )
-
-[node name="music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 5 )
-bus = "music"

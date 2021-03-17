@@ -16,7 +16,11 @@ func _ready() -> void:
 	settings_button.connect('button_up', self, 'emit_signal', ['settings_pressed'])
 	$animations.play('fade_in')
 	$animations.seek(0, true)
-	$music.play()
+	
+	var music_player = get_node('/root/game/music_player')
+	if music_player != null:
+		music_player.play_song("res://assets/ac-ll.ogg")
+
 	play_button.grab_focus()
 
 func _input(event):

@@ -16,7 +16,7 @@ func _ready() -> void:
 	sound_volume_slider.connect('value_changed', self, '__sound_volume_changed')
 
 func _input(event):
-	if event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed("ui_cancel") and visible:
 		done_button.grab_focus()
 		fade_out()
 
