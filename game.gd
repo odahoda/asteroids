@@ -6,14 +6,11 @@ var main_menu_scene = preload("res://main_menu.tscn")
 var main_menu = null
 var hall_of_fame_scene = preload("res://hall_of_fame.tscn")
 var hall_of_fame = null
-onready var settings = $settings
+var settings_scene = preload("res://settings_ui.tscn")
+var settings = null
 
 func _ready() -> void:
 	randomize()
-
-	$settings.visible = false
-	$settings.connect('done', self, 'settings_finished')
-	$settings.load_settings()
 
 	set_state('menu')
 
@@ -39,8 +36,14 @@ func set_state(state: String) -> void:
 		add_child(hall_of_fame)
 
 	elif state == 'settings':
-		$settings.visible = true
-		$settings.fade_in()
+		assert(main_menu != null)
+		main_menu.queue_free()
+		main_menu = null
+
+		assert(settings == null)
+		settings = settings_scene.instance()
+		settings.connect('done', self, 'settings_finished')
+		add_child(settings)
 	
 	elif state == 'play':
 		assert(main_menu != null)

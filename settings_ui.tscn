@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://gui_theme.tres" type="Theme" id=1]
-[ext_resource path="res://settings.gd" type="Script" id=2]
+[ext_resource path="res://settings_ui.gd" type="Script" id=2]
 
 [sub_resource type="Animation" id=1]
 resource_name = "fade_in"
@@ -96,9 +96,8 @@ __meta__ = {
 }
 
 [node name="label_fullscreen" type="Label" parent="controls/grid"]
-margin_top = -1.0
 margin_right = 287.0
-margin_bottom = 49.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 0, 50 )
 text = "Fullscreen"
 valign = 1
@@ -115,9 +114,9 @@ __meta__ = {
 }
 
 [node name="label_music_volume" type="Label" parent="controls/grid"]
-margin_top = 53.0
+margin_top = 54.0
 margin_right = 287.0
-margin_bottom = 103.0
+margin_bottom = 104.0
 rect_min_size = Vector2( 0, 50 )
 text = "Music Volume"
 valign = 1
@@ -133,9 +132,9 @@ tick_count = 5
 ticks_on_borders = true
 
 [node name="label_sound_volume" type="Label" parent="controls/grid"]
-margin_top = 107.0
+margin_top = 108.0
 margin_right = 287.0
-margin_bottom = 157.0
+margin_bottom = 158.0
 rect_min_size = Vector2( 0, 50 )
 text = "Sound Volume"
 valign = 1
