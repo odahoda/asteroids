@@ -29,7 +29,8 @@ CLOSED: [2021-03-17 Mi 17:13]
   - start playback when current song faded out and resource loaded
   - unload prev resource
 
-** settings
+** DONE settings
+CLOSED: [2021-03-24 Mi 16:45]
 ** build release from cmdline
 ** proper game play
 - better kinectics for collisions
