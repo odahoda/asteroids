@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Node2D
 
 var level_scene = preload("res://level.tscn")
 var level = null
@@ -23,7 +23,7 @@ func set_state(state: String) -> void:
 		main_menu.connect('settings_pressed', self, 'show_settings')
 		main_menu.connect('play_pressed', self, 'start_level')
 		main_menu.connect('highscores_pressed', self, 'show_highscores')
-		add_child(main_menu)
+		$ui_layer.add_child(main_menu)
 
 	elif state == 'highscores':
 		assert(main_menu != null)
@@ -33,7 +33,7 @@ func set_state(state: String) -> void:
 		assert(hall_of_fame == null)
 		hall_of_fame = hall_of_fame_scene.instance()
 		hall_of_fame.connect('closed', self, 'highscores_finished')
-		add_child(hall_of_fame)
+		$ui_layer.add_child(hall_of_fame)
 
 	elif state == 'settings':
 		assert(main_menu != null)
@@ -43,7 +43,7 @@ func set_state(state: String) -> void:
 		assert(settings == null)
 		settings = settings_scene.instance()
 		settings.connect('done', self, 'settings_finished')
-		add_child(settings)
+		$ui_layer.add_child(settings)
 	
 	elif state == 'play':
 		assert(main_menu != null)
@@ -88,7 +88,9 @@ func show_settings() -> void:
 
 func settings_finished() -> void:
 	print("settings_finished")
-	$settings.visible = false
+	assert(settings != null)
+	settings.queue_free()
+	settings = null
 	set_state('menu')
 
 func start_level() -> void:
@@ -106,7 +108,7 @@ func level_finished() -> void:
 		hall_of_fame = hall_of_fame_scene.instance()
 		hall_of_fame.set_score(score)
 		hall_of_fame.connect('closed', self, 'highscores_finished')
-		add_child(hall_of_fame)
+		$ui_layer.add_child(hall_of_fame)
 		
 		$music_player.play_song("res://assets/ac-mp.ogg")
 

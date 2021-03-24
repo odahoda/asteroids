@@ -8,7 +8,7 @@ resource_name = "fade_in"
 length = 0.25
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("controls:modulate")
+tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -23,7 +23,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=2]
 length = 0.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("controls:modulate")
+tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -36,28 +36,26 @@ tracks/0/keys = {
 }
 
 [node name="settings" type="Control"]
+modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 1 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="controls" type="Control" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-theme = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="animations" type="AnimationPlayer" parent="."]
+anims/fade_in = SubResource( 1 )
+anims/fade_out = SubResource( 2 )
 
-[node name="title" type="Label" parent="controls"]
+[node name="title" type="Label" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -91.5
 margin_top = 50.0
 margin_right = 91.5
-margin_bottom = 25.0
+margin_bottom = 64.0
 grow_horizontal = 2
 text = "Settings"
 align = 1
@@ -65,7 +63,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="done" type="Button" parent="controls"]
+[node name="done" type="Button" parent="."]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -80,7 +78,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="grid" type="GridContainer" parent="controls"]
+[node name="grid" type="GridContainer" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -95,14 +93,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="label_fullscreen" type="Label" parent="controls/grid"]
+[node name="label_fullscreen" type="Label" parent="grid"]
 margin_right = 287.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 0, 50 )
 text = "Fullscreen"
 valign = 1
 
-[node name="fullscreen" type="CheckButton" parent="controls/grid"]
+[node name="fullscreen" type="CheckButton" parent="grid"]
 margin_left = 399.0
 margin_right = 475.0
 margin_bottom = 50.0
@@ -113,7 +111,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="label_music_volume" type="Label" parent="controls/grid"]
+[node name="label_music_volume" type="Label" parent="grid"]
 margin_top = 54.0
 margin_right = 287.0
 margin_bottom = 104.0
@@ -121,7 +119,7 @@ rect_min_size = Vector2( 0, 50 )
 text = "Music Volume"
 valign = 1
 
-[node name="music_volume" type="HSlider" parent="controls/grid"]
+[node name="music_volume" type="HSlider" parent="grid"]
 margin_left = 337.0
 margin_top = 54.0
 margin_right = 537.0
@@ -131,7 +129,7 @@ size_flags_vertical = 1
 tick_count = 5
 ticks_on_borders = true
 
-[node name="label_sound_volume" type="Label" parent="controls/grid"]
+[node name="label_sound_volume" type="Label" parent="grid"]
 margin_top = 108.0
 margin_right = 287.0
 margin_bottom = 158.0
@@ -139,7 +137,7 @@ rect_min_size = Vector2( 0, 50 )
 text = "Sound Volume"
 valign = 1
 
-[node name="sound_volume" type="HSlider" parent="controls/grid"]
+[node name="sound_volume" type="HSlider" parent="grid"]
 margin_left = 337.0
 margin_top = 108.0
 margin_right = 537.0
@@ -147,7 +145,3 @@ margin_bottom = 158.0
 size_flags_vertical = 1
 tick_count = 5
 ticks_on_borders = true
-
-[node name="animations" type="AnimationPlayer" parent="."]
-anims/fade_in = SubResource( 1 )
-anims/fade_out = SubResource( 2 )

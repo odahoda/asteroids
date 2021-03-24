@@ -4,10 +4,10 @@ signal done
 
 var settings = null
 
-onready var done_button = $controls/done
-onready var fullscreen_button = $controls/grid/fullscreen
-onready var music_volume_slider = $controls/grid/music_volume
-onready var sound_volume_slider = $controls/grid/sound_volume
+onready var done_button = $done
+onready var fullscreen_button = $grid/fullscreen
+onready var music_volume_slider = $grid/music_volume
+onready var sound_volume_slider = $grid/sound_volume
 
 func _ready() -> void:
 	settings = get_node('/root/settings')
@@ -23,7 +23,7 @@ func _ready() -> void:
 	fade_in()
 
 func _input(event):
-	if event.is_action_pressed("ui_cancel") and visible:
+	if event.is_action_pressed("ui_cancel"):
 		done_button.grab_focus()
 		fade_out()
 
