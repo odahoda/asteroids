@@ -13,7 +13,7 @@ func _ready() -> void:
 	$thruster.visible = false
 	$thruster_smoke.emitting = false
 	enable_shield()
-	connect("area_entered", self, "_on_collision")
+	var _unused = connect("area_entered", self, "_on_collision")
 
 func _process(delta: float) -> void:
 	if shield_counter >= 0:

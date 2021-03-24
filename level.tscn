@@ -200,7 +200,7 @@ __meta__ = {
 }
 
 [node name="songinfo" type="Label" parent="HUD"]
-modulate = Color( 0.498039, 0.54902, 0.945098, 0 )
+modulate = Color( 1, 1, 1, 0 )
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -237,9 +237,7 @@ __meta__ = {
 
 [node name="announce" type="Label" parent="HUD"]
 modulate = Color( 1, 1, 1, 0 )
-anchor_left = 1.0
 anchor_top = 0.2
-anchor_right = 1.0
 anchor_bottom = 0.211
 margin_left = -172.5
 margin_right = 172.5
@@ -258,9 +256,8 @@ anims/fade = SubResource( 9 )
 
 [node name="paused" type="Label" parent="HUD"]
 pause_mode = 2
-anchor_left = 0.5
+modulate = Color( 1, 1, 1, 0 )
 anchor_top = 0.5
-anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -172.5
 margin_right = 172.5

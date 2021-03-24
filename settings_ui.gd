@@ -33,7 +33,7 @@ func fade_in() -> void:
 
 func fade_out() -> void:
 	$animations.play('fade_out')
-	$animations.connect('animation_finished', self, '__fade_out_finished', [], CONNECT_ONESHOT)
+	var _unused = $animations.connect('animation_finished', self, '__fade_out_finished', [], CONNECT_ONESHOT)
 
 func __fade_out_finished(_anim) -> void:
 	settings.save_settings()

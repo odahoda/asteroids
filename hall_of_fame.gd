@@ -16,13 +16,13 @@ func _ready() -> void:
 	refresh_scores()
 	$animations.play('fade_in')
 	$animations.seek(0, true)
-	$animations.connect('animation_finished', self, '__fade_in_finished', [], CONNECT_ONESHOT)
+	var _unused = $animations.connect('animation_finished', self, '__fade_in_finished', [], CONNECT_ONESHOT)
 
-func _unhandled_key_input(event: InputEventKey) -> void:
+func _unhandled_key_input(_event: InputEventKey) -> void:
 	if not opening and not closing and not editing:
 		closing = true
 		$animations.play('fade_out')
-		$animations.connect('animation_finished', self, '__fade_out_finished', [], CONNECT_ONESHOT)
+		var _unused = $animations.connect('animation_finished', self, '__fade_out_finished', [], CONNECT_ONESHOT)
 
 func set_score(score: int) -> void:
 	if score != null:

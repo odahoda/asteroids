@@ -30,7 +30,7 @@ func _input(event):
 
 func fade_out(cb_obj, cb_func, cb_args=[]) -> void:
 	$animations.play('fade_out')
-	$animations.connect('animation_finished', self, '__fade_out_finished', [cb_obj, cb_func, cb_args], CONNECT_ONESHOT)
+	var _unused = $animations.connect('animation_finished', self, '__fade_out_finished', [cb_obj, cb_func, cb_args], CONNECT_ONESHOT)
 
 func __fade_out_finished(_anim, cb_obj, cb_func, cb_args) -> void:
 	cb_obj.callv(cb_func, cb_args)

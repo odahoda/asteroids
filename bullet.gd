@@ -11,7 +11,7 @@ func _process(delta: float) -> void:
 	lifetime += delta
 	if lifetime > 2.0 and not $animations.is_playing():
 		$animations.play('fade')
-		$animations.connect('animation_finished', self, '__faded', [], CONNECT_ONESHOT)
+		var _unused = $animations.connect('animation_finished', self, '__faded', [], CONNECT_ONESHOT)
 
 	position += velocity * delta
 

@@ -79,8 +79,9 @@ func _input(event):
 func play_next_song():
 	var music_player = get_node('/root/game/music_player')
 	music_player.play_song(music[music_idx][0])
-	$HUD/songinfo.text = music[music_idx][1]
-	$HUD/songinfo/fade.play('fade')
+	if get_node('/root/settings').get_music_volume() > 0:
+		$HUD/songinfo.text = music[music_idx][1]
+		$HUD/songinfo/fade.play('fade')
 	music_idx = (music_idx + 1) % len(music)
 
 func collect_score(amount):
@@ -123,8 +124,8 @@ func handle_collision(o1: Area2D, o2: Area2D):
 		o2 = t
 
 	if o1 is Player and o2 is Aster:
-		var size
-		var damage
+		var size: int
+		var damage: int
 		if o2.shape == 'big':
 			size = 2
 			damage = 100
@@ -209,7 +210,7 @@ func shoot() -> void:
 	$laser_snd.play()
 
 func inflict_damage(damage: int) -> void:
-	health = max(0, health - damage)
+	health = int(max(0, health - damage))
 	if health == 0:
 		call_deferred('die')
 
