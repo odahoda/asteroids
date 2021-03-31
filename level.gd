@@ -185,7 +185,6 @@ func explode(a1: Aster, a2: Aster) -> void:
 	play_expl4_snd(max_size)
 
 func spawn_cluster(size: int, pos: Vector2, mass: int, impulse: Vector2):
-	print(size, pos, mass, impulse)
 	if size > 2:
 		return
 
