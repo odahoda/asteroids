@@ -96,21 +96,22 @@ func spawn_aster() -> void:
 	var target = Vector2(screen.x * rand_range(0.3, 0.7), screen.y * rand_range(0.3, 0.7))
 	var dir = pos.angle_to_point(target) + PI
 	create_aster(
-		'big',
+		0,
 		pos,
 		Vector2(rand_range(50, 100), 0).rotated(dir),
 		next_spawn_group)
 	next_spawn_group += 1
 
-func create_aster(shape: String, pos: Vector2, vel: Vector2, spawn_group: int = 0) -> void:
+func create_aster(size: int, pos: Vector2, vel: Vector2, spawn_group: int = 0) -> Aster:
 	var aster = aster_scene.instance()
-	aster.shape = shape
+	aster.size = size
 	aster.position = pos
 	aster.vel = vel
 	aster.spawn_group = spawn_group
 	aster.add_to_group("aster")
 	aster.connect('collided', self, 'handle_collision')
 	call_deferred("add_child", aster)
+	return aster
 
 func handle_collision(o1: Area2D, o2: Area2D):
 	if o1 is Aster and o2 is Aster and (o1.spawn_group == 0 or o1.spawn_group != o2.spawn_group):
@@ -124,74 +125,75 @@ func handle_collision(o1: Area2D, o2: Area2D):
 		o2 = t
 
 	if o1 is Player and o2 is Aster:
-		var size: int
-		var damage: int
-		if o2.shape == 'big':
-			size = 2
-			damage = 100
-		elif o2.shape == 'medium':
-			size = 1
-			damage = 40
-		else:
-			size = 0
-			damage = 15
-
-		play_expl4_snd(size)
-		inflict_damage(damage)
+		play_expl4_snd(o2.size)
+		inflict_damage(o2.mass)
 
 		var explosion = explosion_scene.instance()
 		explosion.position = o2.position
+		explosion.vel = o2.vel
 		call_deferred("add_child", explosion)
 		o2.die()
 
 	if o1 is Bullet and o2 is Aster:
-		var size
-		if o2.shape == 'big':
-			create_aster('medium', o2.position, Vector2(rand_range(100, 400), 0).rotated(rand_range(0, 2*PI)), next_spawn_group)
-			create_aster('medium', o2.position, Vector2(rand_range(100, 400), 0).rotated(rand_range(0, 2*PI)), next_spawn_group)
-			collect_score(50)
-			size = 2
-		elif o2.shape == 'medium':
-			create_aster('small', o2.position, Vector2(rand_range(100, 400), 0).rotated(rand_range(0, 2*PI)), next_spawn_group)
-			create_aster('small', o2.position, Vector2(rand_range(100, 400), 0).rotated(rand_range(0, 2*PI)), next_spawn_group)
-			collect_score(20)
-			size = 1
-		else:
-			collect_score(10)
-			size = 0
-		next_spawn_group += 1
-
-		play_expl4_snd(size)
+		spawn_cluster(o2.size + 1, o2.position, o2.mass, o2.mass * o2.vel)
+		collect_score(o2.mass)
+		play_expl4_snd(o2.size)
 
 		var explosion = explosion_scene.instance()
 		explosion.position = o2.position
+		explosion.vel = o2.vel
 		call_deferred("add_child", explosion)
 		o2.die()
 		o1.queue_free()
 
 func explode(a1: Aster, a2: Aster) -> void:
-	var size = 0
+	var max_size = 0
+	var min_size = 1000
+	var pos = Vector2()
+	var mass = 0
+	var impulse = Vector2()
 	for a in [a1, a2]:
-		if a.shape == 'big':
-			size = max(size, 2)
-			create_aster('medium', a.position, Vector2(rand_range(100, 400), 0).rotated(rand_range(0, 2*PI)), next_spawn_group)
-			create_aster('medium', a.position, Vector2(rand_range(100, 400), 0).rotated(rand_range(0, 2*PI)), next_spawn_group)
-			create_aster('small', a.position, Vector2(rand_range(200, 300), 0).rotated(rand_range(0, 2*PI)), next_spawn_group)
-			create_aster('small', a.position, Vector2(rand_range(200, 300), 0).rotated(rand_range(0, 2*PI)), next_spawn_group)
-		elif a.shape == 'medium':
-			size = max(size, 1)
-			create_aster('small', a.position, Vector2(rand_range(100, 400), 0).rotated(rand_range(0, 2*PI)), next_spawn_group)
-			create_aster('small', a.position, Vector2(rand_range(100, 400), 0).rotated(rand_range(0, 2*PI)), next_spawn_group)
-			create_aster('small', a.position, Vector2(rand_range(100, 400), 0).rotated(rand_range(0, 2*PI)), next_spawn_group)
-		else:
-			size = max(size, 0)
-	next_spawn_group += 1
+		pos += a.position
+		mass += a.mass
+		impulse += a.mass * a.vel
+		max_size = max(max_size, a.size)
+		min_size = min(min_size, a.size)
+	pos /= 2
+	spawn_cluster(min_size + 1, pos, mass, impulse)
 
 	var explosion = explosion_scene.instance()
-	explosion.position = (a1.position + a2.position) / 2
+	explosion.position = pos
+	explosion.vel = impulse / mass
 	call_deferred("add_child", explosion)
 
-	play_expl4_snd(size)
+	play_expl4_snd(max_size)
+
+func spawn_cluster(size: int, pos: Vector2, mass: int, impulse: Vector2):
+	print(size, pos, mass, impulse)
+	if size > 2:
+		return
+
+	var asters = []
+	while mass > 0:
+		var asize
+		if size <= 0 and mass >= 100:
+			asize = 0
+			mass -= 100
+		elif size <= 1 and mass >= 40:
+			asize = 1
+			mass -= 40
+		else:
+			asize = 2
+			mass -= 15
+
+		var aster = create_aster(asize, pos, Vector2(rand_range(100, 400), 0).rotated(rand_range(0, 2*PI)), next_spawn_group)
+		asters.append(aster)
+		impulse -= aster.mass * aster.vel
+
+	for aster in asters:
+		aster.vel += impulse / len(asters) / aster.mass
+
+	next_spawn_group += 1
 
 func play_expl4_snd(size: int) -> void:
 	var snd = expl4_snd[expl4_snd_idx]

@@ -350,7 +350,7 @@ texture = ExtResource( 5 )
 
 [node name="thruster" type="AnimatedSprite" parent="."]
 frames = SubResource( 13 )
-frame = 2
+frame = 7
 playing = true
 
 [node name="pship" type="Sprite" parent="."]
@@ -368,7 +368,7 @@ visible = false
 material = SubResource( 14 )
 scale = Vector2( 1.2, 1.2 )
 frames = SubResource( 63 )
-frame = 2
+frame = 12
 playing = true
 
 [node name="shape_shield" type="CollisionShape2D" parent="."]

@@ -4,6 +4,8 @@ extends Area2D
 signal collided
 
 var vel: Vector2 = Vector2()
+var size: int setget __set_size, __get_size
+var mass: int = 0
 var shape: String = 'big'
 var spawn_group: int = 0
 var dead = false
@@ -49,3 +51,25 @@ func die():
 	$collision_medium.set_deferred('disabled', true)
 	$collision_small.set_deferred('disabled', true)
 	queue_free()
+
+func __get_size() -> int:
+	return size
+	
+func __set_size(s: int) -> void:
+	assert(0 <= s and s <= 2)
+	size = s
+	if size == 0:
+		mass = 100
+		shape = 'big'
+	elif size == 1:
+		mass = 40
+		shape = 'medium'
+	else:
+		mass = 15
+		shape = 'small'
+
+func __get_mass() -> int:
+	return mass
+	
+func __get_shape() -> String:
+	return shape

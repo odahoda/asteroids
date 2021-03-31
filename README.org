@@ -31,7 +31,9 @@ CLOSED: [2021-03-17 Mi 17:13]
 
 ** DONE settings
 CLOSED: [2021-03-24 Mi 16:45]
-** build release from cmdline
-** proper game play
+** DONE build release from cmdline
+CLOSED: [2021-03-24 Mi 17:18]
+** DONE proper game play
+CLOSED: [2021-03-31 Mi 23:21]
 - better kinectics for collisions
   - maintain impulse
