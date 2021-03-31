@@ -1,3 +1,19 @@
+# Copyright (c) 2021, Ben Niemann <pink@odahoda.de>
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along
+# with this program; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
 extends Control
 
 signal closed
@@ -69,7 +85,7 @@ func save_scores() -> void:
 
 func refresh_scores() -> void:
 	var box = $box/scores
-	
+
 	editor = null
 	while box.get_child_count() > 0:
 		var child = box.get_child(0)
@@ -120,7 +136,7 @@ func __fade_in_finished(_anim) -> void:
 		$message.text = "New Highscore!"
 	else:
 		$message.text = "Press Any Key to Continue"
-			
+
 	$animations.play('msg_fade')
 
 func __fade_out_finished(_anim) -> void:

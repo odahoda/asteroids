@@ -1,3 +1,19 @@
+# Copyright (c) 2021, Ben Niemann <pink@odahoda.de>
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along
+# with this program; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
 extends Node2D
 
 signal finished
@@ -90,7 +106,7 @@ func collect_score(amount):
 
 func spawn_aster() -> void:
 	$spawn_path/location.offset = randi()
-	
+
 	var pos = $spawn_path/location.position
 	var screen = get_viewport_rect().size
 	var target = Vector2(screen.x * rand_range(0.3, 0.7), screen.y * rand_range(0.3, 0.7))
@@ -118,7 +134,7 @@ func handle_collision(o1: Area2D, o2: Area2D):
 		explode(o1, o2)
 		o1.die()
 		o2.die()
-		
+
 	if o2 is Player or o2 is Bullet:
 		var t = o1
 		o1 = o2
@@ -200,7 +216,7 @@ func play_expl4_snd(size: int) -> void:
 	expl4_snd_idx = (expl4_snd_idx + 1) % len(expl4_snd)
 	snd.pitch_scale = 1.8 - size * 0.5 + rand_range(-0.1, 0.1)
 	snd.play()
-	
+
 func shoot() -> void:
 	if player == null:
 		return
