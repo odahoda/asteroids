@@ -4,7 +4,7 @@
 
 © 2021 by Ben Niemann (<pink@odahoda.de>)
 
-Download for Linux/x64: TBD
+[Download for Linux/x64](https://github.com/odahoda/asteroids/releases)
 
 ## What?
 
