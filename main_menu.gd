@@ -10,6 +10,11 @@ onready var highscores_button = $controls/buttons/highscores
 onready var settings_button = $controls/buttons/settings
 
 func _ready() -> void:
+	var f = File.new()
+	f.open("res://version", File.READ)
+	$controls/version.text = "V" + f.get_as_text().strip_edges()
+	f.close()
+	
 	quit_button.connect('button_up', self, 'emit_signal', ['quit_pressed'])
 	play_button.connect('button_up', self, 'emit_signal', ['play_pressed'])
 	highscores_button.connect('button_up', self, 'emit_signal', ['highscores_pressed'])

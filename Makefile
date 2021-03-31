@@ -9,10 +9,12 @@ build:
 	touch build/.nobackup
 
 export-linux: build-assets build
-	godot-headless --export "Linux/X11" build/asteroids-linux-x11.pck
+	mkdir -p build/linux-x11
+	godot-headless --export "Linux/X11" build/linux-x11/asteroids-$$(cat version)
 
 export-windows: build-assets build
-	godot-headless --export "Windows Desktop" build/asteroids-windows.pck
+	mkdir -p build/windows
+	godot-headless --export "Windows Desktop" build/windows/asteroids-$$(cat version).exe
 
 export-html5: build-assets build
 	mkdir -p build/html5
